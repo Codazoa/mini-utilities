@@ -1,16 +1,31 @@
 CC = gcc
-CFLAGS = -Wall -Werror
+CFLAGS = -Wall -Werror -g
 
-all: my-cat my-sed my-uniq
+SOURCES1 = my-cat.c
+OBJECTS1 = $(SOURCES1:.c=.o)
+EXECUTABLE1 = my-cat
 
-my-cat:
-	$(CC) -o my-cat my-cat.c $(CFLAGS)
+SOURCES2 = my-sed.c
+OBJECTS2 = $(SOURCES2:.c=.o)
+EXECUTABLE2 = my-sed
 
-my-sed:
-	$(CC) -o my-sed my-sed.c $(CFLAGS)
+SOURCES3 = my-uniq.c
+OBJECTS3 = $(SOURCES3:.c=.o)
+EXECUTABLE3 = my-uniq
 
-my-uniq:
-	$(CC) -o my-uniq my-uniq.c $(CFLAGS)
+all: $(EXECUTABLE1) $(EXECUTABLE2) $(EXECUTABLE3)
+
+$(EXECUTABLE1): $(OBJECTS1)
+	$(CC) $(OBJECTS1) -o $@
+
+$(EXECUTABLE2): $(OBJECTS2)
+	$(CC) $(OBJECTS2) -o $@
+
+$(EXECUTABLE3): $(OBJECTS3)
+	$(CC) $(OBJECTS3) -o $@
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f my-cat my-sed my-uniq
+	rm -f $(OBJECTS1) $(OBJECTS2) $(OBJECTS3) $(EXECUTABLE1) $(EXECUTABLE2) $(EXECUTABLE3)
