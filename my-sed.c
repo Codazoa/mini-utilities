@@ -52,6 +52,11 @@ int main(int argc, char const *argv[]){
             FILE *file_ptr; 
             file_ptr = fopen(argv[i], "r");
 
+            if (!file_ptr){ // open file error
+                printf("my-sed: cannot open file\n");
+                exit(1);
+            }
+
             // read lines from the file
             readlines(find_term, replace_term, file_ptr);
 
