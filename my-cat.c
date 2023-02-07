@@ -6,9 +6,11 @@ int main(int argc, char const *argv[]){
     FILE *file_ptr;
     file_ptr = fopen(argv[1], "r");
 
+    // TODO: loop through files
+
     // check if the file was opened
     if(file_ptr == NULL){
-        printf("Error opening file");
+        perror("my-cat: cannot open file\n");
         exit(1); 
     }
 
