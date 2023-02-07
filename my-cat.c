@@ -2,10 +2,7 @@
 #include <stdlib.h>
 
 int main(int argc, char const *argv[]){
-    
-
-    // TODO: loop through files
-
+    // loop through files
     for (int i = 1; i < argc; i++){
         // get a filepointer for reading
         FILE *file_ptr;
@@ -25,8 +22,5 @@ int main(int argc, char const *argv[]){
         }
     }
 
-
-    // // print final newline character
-    // printf("\n");
     return 0;
 }
