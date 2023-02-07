@@ -39,7 +39,7 @@ void readlines(const char *find_term, const char *replace_term, FILE *file_ptr){
 int main(int argc, char const *argv[]){
     // argc >= 4 (3+ arguments)
     if (argc < 3){
-        printf("my-sed: find_term replace_term [file ...]\n");
+        perror("my-sed: find_term replace_term [file ...]\n");
         exit(1);
     }
 
@@ -53,7 +53,7 @@ int main(int argc, char const *argv[]){
             file_ptr = fopen(argv[i], "r");
 
             if (!file_ptr){ // open file error
-                printf("my-sed: cannot open file\n");
+                perror("my-sed: cannot open file\n");
                 exit(1);
             }
 
