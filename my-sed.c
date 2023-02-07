@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 // reads lines from the given file pointer, replaces first instance
 // of find_term with replace_term and prints the line to stdout
@@ -39,12 +40,20 @@ void readlines(const char *find_term, const char *replace_term, FILE *file_ptr){
 int main(int argc, char const *argv[]){
     // argc >= 4 (3+ arguments)
     if (argc < 3){
+        errno = EINVAL;
         perror("my-sed: find_term replace_term [file ...]\n");
         exit(1);
     }
 
+
     const char *find_term = argv[1];
     const char *replace_term = argv[2];
+
+    if (find_term[0] == '\0'){ // find term was "" (NULL)
+        errno = EINVAL;
+        perror("");
+        exit(1);
+    }
 
     if (argv[3]){
         // loop to open multiple files for read/write
