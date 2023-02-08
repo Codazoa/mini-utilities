@@ -45,7 +45,6 @@ int main(int argc, char const *argv[]){
         exit(1);
     }
 
-
     const char *find_term = argv[1];
     const char *replace_term = argv[2];
 
