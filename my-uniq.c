@@ -19,24 +19,27 @@ int main(int argc, char const *argv[]){
         size_t read2;
 
         while ((read1 = getline(&line1, &len1, file_ptr)) != -1){
-            if (!line1){
+            read2 = getline(&line2, &len2, file_ptr);
+            if (!line1 || !line2){
                 // memory allocation failed
                 fclose(file_ptr);
                 perror("Memory allocation failed");
                 exit(1);
             }
-            if ((read2 = getline(&line2, &len2, file_ptr)) == -1){
+            
+            if (read2 == -1) {
                 printf("%s", line1);
                 break;
             }
 
             if (strcmp(line1, line2) != 0){ // lines are different
                 printf("%s", line1);
+                fseek(file_ptr, -len1, SEEK_CUR);
             }
             
+            free(line1);
+            free(line2);
         }
-        free(line1);
-        free(line2);
 
         fclose(file_ptr);
     }
