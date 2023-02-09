@@ -13,6 +13,8 @@ my-cat will return 0 if run with no file arguments
 ## `./my-sed find_term replace_term [file ...]`
 Replace the first instance of find_term on each line from each file with replace_term and print the resulting line to standard output
 
+If no file given, my-sed will recieve input from stdin
+
 my-sed will return 0 if the program exits cleanly \
 my-sed will return 1 in the following cases:
 - Invalid Arguments
