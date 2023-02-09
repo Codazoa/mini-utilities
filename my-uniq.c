@@ -4,7 +4,6 @@
 #include<errno.h>
 
 int main(int argc, char const *argv[]){
-    printf("main\n");
 
     for (int i = 1; i < argc; i++){
         FILE *file_ptr; 
@@ -28,18 +27,20 @@ int main(int argc, char const *argv[]){
             }
             
             if (read2 == -1) {
-                printf("%s", line1);
+                printf("Here: %s", line1);
                 break;
             }
 
             if (strcmp(line1, line2) != 0){ // lines are different
                 printf("%s", line1);
-                fseek(file_ptr, -len1, SEEK_CUR);
+                fseek(file_ptr, -read2, SEEK_CUR);
+            } else {
+                printf("%s", line1);
             }
             
-            free(line1);
-            free(line2);
         }
+        free(line1);
+        free(line2);
 
         fclose(file_ptr);
     }
