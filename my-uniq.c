@@ -5,7 +5,7 @@
 
 int main(int argc, char const *argv[]){
     
-    for (int i = 0; i < argc; i++){         //Go through each argument, which all should be files
+    for (int i = 1; i < argc; i++){         //Go through each argument, which all should be files
         
         FILE *file_ptr;                     //Initialize variable to hold file
         char* line = NULL;                  //Initialize variable to hold read line
@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]){
         int ignore = 0;                     //Flag to only print once
         
         
-        file_ptr = fopen(argv[argc], "r");  //Attempt to open file given by user
+        file_ptr = fopen(argv[i], "r");  //Attempt to open file given by user
 
         // check if the file was opened
         if(file_ptr == NULL){               //If the file didn't open, error out and exit
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[]){
 
         //Go through each line
         while ((getline(&line, &length, file_ptr)) != EOF){
-            
+
             if (!line){
                 // memory allocation failed
                 fclose(file_ptr);
