@@ -13,7 +13,7 @@ my-cat will return 0 if run with no file arguments
 ## `./my-sed find_term replace_term [file ...]`
 Replace the first instance of find_term on each line from each file with replace_term and print the resulting line to standard output
 
-If no file given, my-sed will recieve input from stdin
+If no file is given, my-sed will recieve input from stdin
 
 my-sed will return 0 if the program exits cleanly \
 my-sed will return 1 in the following cases:
@@ -23,7 +23,14 @@ my-sed will return 1 in the following cases:
 - A given line could not fit into memory
 
 ## `./my-uniq [file ...]`
-Detect duplicate adjacent lines in the file and print contents to standard output
+Delete adjacent duplicate lines from each file provided and print the output to shell
+
+If no file is given, my-uniq will recieve input from stdin
+
+my-uniq will return 0 if the program exits cleanly \
+my-uniq will return 1 in the following cases:
+- Unable to open file
+- A given line could not fit into memory
 
 ## To Compile:
 `make`: compile the 3 executables \
