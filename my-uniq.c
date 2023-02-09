@@ -4,18 +4,21 @@
 #include<errno.h>
 
 int main(int argc, char const *argv[]){
+    printf("main\n");
     
     for (int i = 1; i < argc; i++){         //Go through each argument, which all should be files
-        
+
+        printf("Initialize Variables\n");   
         FILE *file_ptr;                     //Initialize variable to hold file
-        char* line = NULL;                  //Initialize variable to hold read line
-        char* lastline = NULL;              //Initialize variable to hold last line
+        char* line = "";                  //Initialize variable to hold read line
+        char* lastline = "";              //Initialize variable to hold last line
         size_t length = 0;                  //Initialize variable to hold the length
         int ignore = 0;                     //Flag to only print once
         
-        
+        printf("Try and open file\n");
         file_ptr = fopen(argv[i], "r");  //Attempt to open file given by user
 
+        printf("Check to see if file opened\n");
         // check if the file was opened
         if(file_ptr == NULL){               //If the file didn't open, error out and exit
             perror("my-uniq: cannot open file\n");
@@ -24,22 +27,26 @@ int main(int argc, char const *argv[]){
 
 
         //Go through each line
+        printf("start while loop\n");
         while ((getline(&line, &length, file_ptr)) != EOF){
 
+            printf("Check to see if we allocated memory\n");
             if (!line){
                 // memory allocation failed
                 fclose(file_ptr);
-                perror("Memory allocation failed");
+                perror("Memory allocation failed\n");
                 exit(1);
             }
             
+            printf("check to see if we arent the same as the last one\n");
             //Reset out ignore flag if the last one didn't match
             if (strcmp(line, lastline) != 0 ){
                 ignore = 0;
             }
 
+            printf("Check to see if we should print\n");
             //Check to see if we matched the last line and we haven't printed already
-            if ((strcmp(line,lastline ) == 0) && (ignore == 0)){
+            if ((strcmp(line, lastline ) == 0) && (ignore == 0)){
                 ignore = 1;             //Set our flag so we don't print again
                 printf("%s", line);     //print
             }
@@ -51,6 +58,7 @@ int main(int argc, char const *argv[]){
 
 
     }
+    printf("End\n");
 
 
     
